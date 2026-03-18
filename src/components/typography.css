@@ -1,0 +1,267 @@
+.character-stagger,
+.blur-reveal,
+.letters-pull-up,
+.glitch-text,
+.animated-gradient-text,
+.typewriter,
+.flip-words,
+.text-scramble {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.character-stagger__char,
+.blur-reveal__char,
+.letters-pull-up__char,
+.text-scramble__char {
+  display: inline-block;
+  white-space: pre;
+}
+
+.character-stagger__char {
+  opacity: 0;
+  transform: translateY(1.1em) scale(0.92);
+  animation: character-stagger-rise var(--motion-duration, 0.55s) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes character-stagger-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.typewriter {
+  gap: 0.05em;
+  min-height: 1.2em;
+}
+
+.typewriter__cursor {
+  display: inline-block;
+  color: #76e8ff;
+  animation: blink-caret 0.95s steps(2, end) infinite;
+}
+
+@keyframes blink-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.blur-reveal__char {
+  opacity: 0;
+  filter: blur(16px);
+  transform: translateY(0.4em) scale(0.98);
+  animation: blur-in-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes blur-in-reveal {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+.flip-words {
+  gap: 0.18em;
+}
+
+.flip-words__static {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.flip-words__viewport {
+  position: relative;
+  display: inline-flex;
+  min-width: 7ch;
+  min-height: 1.1em;
+  perspective: 800px;
+}
+
+.flip-words__word {
+  transform-origin: center bottom;
+  backface-visibility: hidden;
+  color: #9b8cff;
+}
+
+.flip-words__word.is-flipping {
+  animation: flip-word 0.62s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes flip-word {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg) translateY(0.5em);
+  }
+  40% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg) translateY(0);
+  }
+}
+
+.text-scramble {
+  letter-spacing: -0.03em;
+}
+
+.text-scramble__char[data-state='settled'] {
+  color: #f5f7fb;
+}
+
+.text-scramble__char[data-state='scrambling'] {
+  color: #8a95ff;
+}
+
+.letters-pull-up {
+  gap: 0;
+}
+
+.letters-pull-up__mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.letters-pull-up__char {
+  transform: translateY(1.12em);
+  animation: pull-up-in 0.72s cubic-bezier(0.2, 1, 0.25, 1) forwards;
+}
+
+@keyframes pull-up-in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.glitch-text {
+  position: relative;
+  color: #f5f7fb;
+  isolation: isolate;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: #53f6ff;
+  transform: translate(-0.02em, -0.01em);
+  mix-blend-mode: screen;
+  animation: glitch-shift-1 1.8s infinite steps(2);
+}
+
+.glitch-text::after {
+  color: #ff4fd8;
+  transform: translate(0.02em, 0.01em);
+  mix-blend-mode: screen;
+  animation: glitch-shift-2 1.45s infinite steps(2);
+}
+
+@keyframes glitch-shift-1 {
+  0%,
+  14%,
+  52%,
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.45;
+    transform: translate(-0.02em, -0.01em);
+  }
+  15% {
+    clip-path: inset(10% 0 55% 0);
+    transform: translate(-0.08em, -0.04em);
+  }
+  53% {
+    clip-path: inset(62% 0 6% 0);
+    transform: translate(0.06em, 0.04em);
+  }
+}
+
+@keyframes glitch-shift-2 {
+  0%,
+  18%,
+  48%,
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.4;
+    transform: translate(0.02em, 0.01em);
+  }
+  19% {
+    clip-path: inset(45% 0 22% 0);
+    transform: translate(0.08em, -0.03em);
+  }
+  49% {
+    clip-path: inset(5% 0 68% 0);
+    transform: translate(-0.05em, 0.04em);
+  }
+}
+
+.animated-gradient-text {
+  background-image: linear-gradient(120deg, #ff5f6d 0%, #ffc371 18%, #fff680 34%, #73ffd2 52%, #4fc3ff 70%, #af6bff 86%, #ff5f6d 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradient-flow 4s linear infinite;
+}
+
+@keyframes gradient-flow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+.text-progress-reveal {
+  --progress: 0.4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.text-progress-reveal__progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.text-progress-reveal__label {
+  min-width: 6.5rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.text-progress-reveal__slider {
+  width: min(100%, 320px);
+  accent-color: #9b8cff;
+}
+
+.text-progress-reveal__copy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.14em;
+  align-items: flex-end;
+}
+
+.text-progress-reveal__word {
+  --word-progress: clamp(0, calc((var(--progress) - var(--word-turn)) / var(--word-step)), 1);
+  display: inline-flex;
+  transform: translate3d(0, calc(100% - var(--word-progress) * 100%), 0);
+  clip-path: inset(-15% 0 calc(115% - var(--word-progress) * 130%) 0);
+  opacity: calc(0.2 + var(--word-progress) * 0.8);
+  will-change: transform, clip-path, opacity;
+}
+
+.text-progress-reveal__word.is-highlighted {
+  color: #a9a0b4;
+}

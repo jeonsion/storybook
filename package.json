@@ -1,0 +1,16 @@
+{
+  "name": "storybook-typography-motion",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "storybook": "npm run build-storybook && python3 -m http.server 6006 -d storybook-static",
+    "storybook:dev": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/web-components-vite": "10.2.19",
+    "storybook": "10.2.19",
+    "vite": "latest"
+  }
+}
